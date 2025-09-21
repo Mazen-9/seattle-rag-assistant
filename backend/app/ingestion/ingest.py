@@ -4,9 +4,6 @@ from dotenv import load_dotenv
 from pypdf import PdfReader
 from langchain_experimental.text_splitter import SemanticChunker
 from langchain_text_splitters import TokenTextSplitter
-#from langchain_text_splitters import SemanticChunker, TokenTextSplitter
-#from langchain_postgres.vectorstores import PGVector as PGVectorStore
-#from langchain_postgres import ConnectionParams
 from langchain_community.vectorstores.pgvector import PGVector as PGVectorStore
 
 load_dotenv()
@@ -23,8 +20,6 @@ PG_CONN_STR = (
     f"{os.getenv('PGDATABASE','seattle_rag')}"
 )
 COLLECTION = os.getenv("PGVECTOR_COLLECTION", "seattle_docs")
-
-#conn = ConnectionParams.from_connection_string(PG_CONN_STR)
 
 #extract the text from the pdfs
 def pdf_load_text(path):
@@ -82,9 +77,6 @@ def main():
 
     embeddings = OpenAIEmbeddings(model="text-embedding-3-small")
     
-    #vstore = PGVectorStore( connection = conn, collection_name=COLLECTION,
-#                           embedding_function=embeddings)
-
     vstore = PGVectorStore.from_texts(
         texts=texts,
         embedding=embeddings,
@@ -93,11 +85,7 @@ def main():
         collection_name=COLLECTION
     )
      
-    #vstore.add_texts(texts,metadatas=metas)
-
     print(f"Ingested {len(texts)} chunks into '{COLLECTION}'")
-
-
 
 if __name__ == "__main__":
     main()
