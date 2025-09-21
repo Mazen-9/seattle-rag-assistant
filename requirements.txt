@@ -1,11 +1,14 @@
-fastapi[standard]
+fastapi
 uvicorn
 python-dotenv
-pydantic
 langchain
 langchain-openai
-langchain-postgres ; platform_system != "Windows"
 langchain-community
 langchain-text-splitters
 pypdf
 httpx
+psycopg[binary]
+
+# Dev extras
+black
+ruff
