@@ -4,8 +4,8 @@ python-dotenv
 pydantic
 langchain
 langchain-openai
-langchain-postgres ; platform_system != "Windows"
 langchain-community
 langchain-text-splitters
 pypdf
 httpx
+psycopg[binary] 
